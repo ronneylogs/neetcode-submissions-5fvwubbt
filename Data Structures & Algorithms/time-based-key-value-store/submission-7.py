@@ -1,0 +1,37 @@
+class TimeMap:
+
+    def __init__(self):
+        self.timeMap = {}
+        
+
+    def set(self, key: str, value: str, timestamp: int) -> None:
+        if key not in self.timeMap:
+            self.timeMap[key] = []
+            self.timeMap[key].append((timestamp,value))
+        else:
+            self.timeMap[key].append((timestamp,value))
+        
+
+    def get(self, key: str, timestamp: int) -> str:
+        if self.timeMap == None or key not in self.timeMap:
+            return ""
+
+        if self.timeMap[key]:
+            w = ""
+            l = 0
+            r = len(self.timeMap[key]) - 1
+            while l<=r:
+                m = (l+r) // 2
+                if self.timeMap[key][m][0] <= timestamp:
+                    w = self.timeMap[key][m][1]
+                    l = m+1
+                else:
+                    r = m-1
+            return w
+
+        else:
+            return ""
+
+
+        
+
